@@ -1,0 +1,22 @@
+mysql:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: 'root'
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+composer:
+  image: composer/composer
+  volumes: ['./drupal:/var/www/html']
+  working_dir: /var/www/html
+
+php:
+  build: ./containers/php-cli
+  volumes_from: [composer]
+  working_dir: /var/www/html/web
+  links: [mysql]
+
+apache:
+  build: ./containers/php-apache
+  volumes_from: [composer]
+  links: [mysql]
+  ports: ['8888:80']
