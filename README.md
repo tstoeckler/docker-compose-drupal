@@ -1,1 +1,1 @@
-git clone git@github.com:drupal-composer/drupal-project.git drupal
+git clone https://github.com/drupal-composer/drupal-project.gitt drupal
